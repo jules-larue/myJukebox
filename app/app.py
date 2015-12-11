@@ -6,3 +6,15 @@ from flask.ext.script import Manager
 app = Flask(__name__) # The Flask application
 app.debug = True
 manager = Manager(app)
+
+# database
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+import os.path
+def mkpath(p):
+    return os.path.normpath(
+        os.path.join(
+            os.path.dirname(__file__),
+            p))
+from flask.ext.sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///'+mkpath('../app.db'))
+db=SQLAlchemy(app)
