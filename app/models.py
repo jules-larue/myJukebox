@@ -16,6 +16,11 @@ class Genre(db.Model):
 
         return "<Genre %s (%d)>" % (self.nom, self.id)
 
+    
+genre_album = db.Table("genre_album",
+                        db.Column('genre_id', db.Integer, db.ForeignKey("genre.id"), primary_key=True),
+                        db.Column('album_id', db.Integer, db.ForeignKey("album.id"), primary_key=True)
+                        )
 
 class Album(db.Model):
     id         = db.Column(db.Integer, primary_key=True)
@@ -24,6 +29,7 @@ class Album(db.Model):
     annee      = db.Column(db.Integer)
     artiste_id = db.Column(db.Integer, db.ForeignKey("artiste.id"))
     artiste    = db.relationship("Artiste", backref=db.backref("artiste", lazy="dynamic"))
+    genres     = db.relationship("Genre", secondary=genre_album, backref=db.backref("genres", lazy="dynamic"))
     
 
     def __repr__(self):
@@ -43,12 +49,5 @@ class Utilisateur(db.Model):
 
     def __repr__(self):
         return "<User %s >" % (self.login)
+    
 
-
-
-class GenreAlbum(db.Model):
-    """ Table qui lie un genre à un album """
-    genre_id = db.Column(db.Integer, db.ForeignKey("genre.id"), primary_key=True)
-    album_id = db.Column(db.Integer, db.ForeignKey("album.id"), primary_key=True)
-    genre    = db.relationship("Genre", backref=db.backref("genre", lazy="dynamic"))
-    album    = db.relationship("Album", backref=db.backref("album", lazy="dynamic"))
