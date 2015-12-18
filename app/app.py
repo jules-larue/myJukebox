@@ -1,11 +1,16 @@
 #! /usr/bin/env python3
 from flask import Flask
 from flask.ext.script import Manager
+from flask.ext.bootstrap import Bootstrap
 
 
 app = Flask(__name__) # The Flask application
 app.debug = True
 manager = Manager(app)
+
+# Bootstrap
+app.config['BOOTSTRAP_SERVE_LOCAL'] = True
+Bootstrap(app)
 
 # database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True

@@ -1,0 +1,63 @@
+@import url("base.css");
+
+@font-face {
+    font-family: rock;
+    src: url('fonts/rock.ttf');
+}
+
+.img-circle{
+    display:block;
+    margin:auto;
+    margin-top:20px;
+}
+
+.carousel{
+    position:relative;
+    width:100%;
+}
+
+.carousel-inner{
+    position:relative;
+    width:100%;
+}
+
+.item{
+    height:500px;
+}
+
+.carousel img{
+    width:100%;
+}
+.carousel-caption{
+    position:absolute;
+    display: inline;
+    color:black;
+    vertical-align: middle !important;
+}
+
+.carousel-caption p{
+    margin-bottom:20px;
+    font-size:21px;
+}
+
+h1{
+    font-family:rock;
+    font-size:80px;
+    color:#870000;
+    font-size: 5em;
+    margin-bottom: 20px;
+}
+
+h2{
+    text-align:center;
+}
+
+p{
+    text-align:center;
+}
+
+@media (min-width: 768px){
+    .filler{
+	height: 70px;
+    }
+}
