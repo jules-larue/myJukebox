@@ -1,0 +1,13 @@
+ul{
+    width: 70% !important;
+    text-align:center;
+}
+
+#login-link{
+    color:#9D9D9D !important;
+    text-decoration:none;
+}
+
+#login-link:hover{
+    color: #fff !important;
+}
