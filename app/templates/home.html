@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+{% endblock %}
+
+
+{% block main %}
+<!-- Carousel -->
+<div class="sample main">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+	<img class="first-slide" src="{{ url_for('static', filename='grey.jpeg') }}" alt="First slide">
+	<div class="container">
+          <div class="carousel-caption">
+            <h1 id="rock-font">Let's rooock !</h1>
+            <p>La plus belle bibliothèques de titres audio pour tous les amateurs de pure musique rock.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Inscrivez-vous maintenant !</a></p>
+	    <div class="filler"></div>
+          </div>
+	</div>
+      </div>
+      <div class="item">
+	<img class="second-slide" src="{{ url_for('static', filename='grey.jpeg') }}" alt="Second slide">
+	<div class="container">
+          <div class="carousel-caption">
+            <h1>Une communauté de fans.</h1>
+            <p>Notre collection est alimentée par des amateurs qui, comme vous, ont le rock dans la peau.</p>
+	    <div class="filler"></div>
+          </div>
+	</div>
+      </div>
+      <div class="item">
+	<img class="third-slide" src="{{ url_for('static', filename='grey.jpeg') }}" alt="Third slide">
+	<div class="container">
+          <div class="carousel-caption">
+            <h1>Une bibliothèque à vous.</h1>
+            <p>Créez votre bibliothèque personnelle et rendez-là unique. Distinguez-vous.</p>
+	    <div class="filler"></div>
+          </div>
+	</div>
+      </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Précedent</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Suivant</span>
+    </a>
+  </div><!-- /.carousel -->
+
+
+  <!-- Marketing messaging and featurettes
+       ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+	<img class="img-circle" src="{{ url_for('static', filename='music_note.png') }}" alt="Generic placeholder image" width="140" height="140">
+	<h2>Votre musique. A vous.</h2>
+	<p>Ici, nous partageons tous la même passion, mais avons des goûts différents. C'est pourquoi vous pouvez personnaliser votre bibliothèque personnelle en y ajoutant les titres de votre choix. Vous ne ressemblerez à personne.</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+	<img class="img-circle" src="{{ url_for('static', filename='folder_guitar.png') }}" alt="Generic placeholder image" width="140" height="140">
+	<h2>Enrichissez notre collection. Ou la vôtre</h2>
+	<p>Notre limite est illimitée. Soyez acteur de notre site, ajoutez vous aussi des titres afin de les partager avec les autres. La collaboration à l'état pur.</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+	<img class="img-circle" src="{{ url_for('static', filename='icon-responsive.png') }}" alt="Generic placeholder image" width="140" height="140">
+	<h2>C'est beau. Partout.</h2>
+	<p>Même loin de chez vous, ne partez pas sans votre jukebox. Sur votre ordinateur, votre tablette ou votre smaprthone, profitez d'une expérience intense et ergonomique. Nous avons pensé à tout, juste pour vous.</p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="pull-right"><a href="#">Haut de page</a></p>
+      <p>Projet - IUT d'Orléans par les étudiants Jules LARUE et Guillaume FROGER</p>
+    </footer>
+  </div>
+</div><!-- /.container -->
+{% endblock %}
