@@ -49,5 +49,13 @@ class Utilisateur(db.Model):
 
     def __repr__(self):
         return "<User %s >" % (self.login)
-    
 
+
+
+###################################
+# ACCESSEURS A LA BASE DE DONNEES #
+###################################
+
+def get_albums(page):
+    """ renvoie tous les albums de la base paginés """
+    return Album.query.paginate(page, 12, False)
