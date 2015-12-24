@@ -1,0 +1,66 @@
+{% extends "albums.html" %}
+
+{% block styles %}
+{{super()}}
+{% endblock %}
+
+{% block title %}Résultats de recherche{% endblock %}
+
+{% block main %}
+{{super()}}
+{% block h1 %}Résultats de la recherche <b>{{query}}</b>{% endblock %}
+{% endblock %}
+
+
+<!-- Bloc pour les liens de pagination -->
+{% block pagination %}
+<ul class="pagination">
+
+<!-- Page précédente -->
+{% if page>1 %}
+<li>
+      <a href="{{ url_for('recherche_resultats', query=query, page=albums.prev_num) }}" class="page-link" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+</li>
+{% endif %}
+
+<!-- Deux pages avant -->
+{% if page>2 %}
+<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.prev_num-1) }}">{{albums.prev_num-1}}</a></li>
+{% endif %}
+
+<!-- Numéro précedent -->
+{% if albums.has_prev %}
+<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.prev_num) }}">{{albums.prev_num}}</a></li>
+{% endif %}
+
+<!-- Le numéro de page courante -->
+<li><a class="page-link active" href="#">{{page}}</a></li>
+
+<!-- Numéro suivant -->
+{% if albums.has_next %}
+<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.next_num) }}">{{albums.next_num}}</a></li>
+{% endif %}
+
+<!-- Deux pages après -->
+{% if page<=albums.pages-2 %}
+<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.next_num+1) }}">{{albums.next_num+1}}</a></li>
+{% endif %}
+
+<!-- Page suivante -->
+{% if page<albums.pages %}
+<li>
+      <a href="{{ url_for('recherche_resultats', query=query, page=albums.next_num) }}" class="page-link" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+</li>
+{% endif %}
+</ul> <!-- Fin de la pagination ul -->
+
+{% endblock %} <!-- Fin bloc pagination -->
+
+
+{% block js %}
+curTab = "albums-tab"
+{% endblock %}

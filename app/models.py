@@ -1,4 +1,8 @@
 from app import db
+from flask.ext.wtf import Form
+from wtforms import StringField
+from wtforms.validators import DataRequired
+import sqlalchemy
 
 class Artiste(db.Model):
     id  = db.Column(db.Integer, primary_key=True)
@@ -50,6 +54,10 @@ class Utilisateur(db.Model):
     def __repr__(self):
         return "<User %s >" % (self.login)
 
+class SearchForm(Form):
+    search = StringField("Recherche", validators=[DataRequired()])
+    
+
 
 
 ###################################
@@ -70,3 +78,8 @@ def get_some_albums_by_artist(album_id):
     """ renvoie quelques albums (4 maximums) de l'artiste associé à l'id de l'album passé en paramètre """
     idArtiste = Album.query.filter(Album.id==album_id).one().artiste_id
     return Album.query.filter((Album.artiste_id==idArtiste) & (Album.id!=album_id)).limit(4).all()
+
+
+def get_results_of_search(research, page):
+    """ renvoie tous les albums dont le titre contient une partie de la recherche (ou est égal à la recherche)"""
+    return Album.query.filter(sqlalchemy.func.lower(Album.titre).contains(research.lower())).paginate(page, 12, False)

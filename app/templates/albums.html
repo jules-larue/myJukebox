@@ -8,7 +8,9 @@
 
 {% block main %}
 
-<h1>Tous nos albums</h1>
+<h1>
+  {% block h1 %}Tous nos albums{% endblock %}
+</h1>
 
 <!-- Bloc avec tous les résultats -->
 {% block resultats %}

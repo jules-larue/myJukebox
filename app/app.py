@@ -23,3 +23,5 @@ def mkpath(p):
 from flask.ext.sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///'+mkpath('../app.db'))
 db=SQLAlchemy(app)
+
+app.config['SECRET_KEY'] = "ca4fea79-f05e-4f0c-af86-261fd3b830c5"
