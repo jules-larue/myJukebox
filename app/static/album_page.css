@@ -1,0 +1,99 @@
+.main{
+    margin-top:150px;
+}
+
+.infos-row{
+    margin:auto;
+    text-align:center;
+    border: ridge 2px grey;
+    border-radius:15px;
+    background: linear-gradient(45deg, #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%);
+    padding-top:25px;
+    padding-bottom:25px;
+}
+
+.infos-row img{
+    width:320px;
+    height:260px;
+}
+
+
+.infos-row h1{
+    position:relative;
+    font-size:4em;
+    bottom:20px;
+    margin-bottom:-25px;
+}
+
+.infos{
+    text-align:left;
+}
+
+.ajout{
+    margin-top:35px;
+}
+
+.infos-row h2{
+    font-weight:none;
+    font-size:1.5em;
+    color: #7a7a7a;
+}
+
+.autres-albums-artiste-row h1{
+    text-align:left;
+    margin-left:15px;
+    font-size:1.3em;
+}
+
+.autres-albums-artiste-row{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:50px;
+    margin-bottom:30px;
+    text-align:center;
+    background: linear-gradient(45deg, #feffff 0%,#d2ebf9 100%);
+    border: ridge 2px #0fc1fc;
+    border-radius:15px;
+}
+
+.autres-albums-artiste-row img{
+    width:65%;
+}
+
+.autres-albums-artiste-row h2{
+    margin:auto;
+    font-size:15px;
+    margin-bottom:45px;
+    margin-top:7px;
+}
+
+.autres-albums-artiste-row a:hover{
+    text-decoration:none;
+}
+
+
+
+
+@media (max-width:768px){
+    .row h1{
+	position:relative;
+	top:25px;
+	margin-bottom:85px;
+    }
+    
+    .row img{
+	width:50%;
+    }
+
+    .infos{
+	text-align:center;
+    }
+
+    .ajout{
+	margin-bottom:30px;
+    }
+
+    .autres-albums-artiste-row h2{
+	width:50%;
+    }
+}

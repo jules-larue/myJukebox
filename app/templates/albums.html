@@ -16,7 +16,7 @@
 <div class="row">
   {% for album in albums.items %}
   <div class="col-xs-12 col-sm-4 col-xl-2">
-    <a href="#">
+    <a href="/albums/album/{{album.id}}">
     <!-- On montre un aperçu spécial pour le moment (la vraie cover sera mise à l'IUT) -->
     <img src=" {{ url_for('static', filename='non_disponible.jpg') }}" />
     <h3>{{album.titre}}</h3>

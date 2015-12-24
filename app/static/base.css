@@ -15,53 +15,54 @@ nav ul{
 
 
 .navbar-form{
-	display:inline-block !important;
-	width: 40% !important;
-	padding-left:0;
-	padding-right:0;
+    display:inline-block !important;
+    width: 40% !important;
+    padding-left:0;
+    padding-right:0;
 }
 
 .navbar-right{
-	bottom:50px;
-	margin-right:0px;
+    bottom:50px;
+    margin-right:0px;
 }
 
 .input-group{
-	width:100%;
+    width:100%;
 }
 
 @media (max-width:1202px) and (min-width:993px){
-	nav ul{
-		width:50%;
-		}
-	
-	.navbar-form{
-		width:30% !important;
-	}
+    nav ul{
+	width:50%;
+    }
+    
+    .navbar-form{
+	width:30% !important;
+    }
 }
 
 @media (max-width:992px) and (min-width:769px){
 
-	
-	.navbar-form{
-		padding:0 0 0 0;
-		padding-right:0px;
-		width:60% !important;
-	}
-	
-	.navbar-right{
-		margin-right:170px;
-	}
+    
+    .navbar-form{
+	padding:0 0 0 0;
+	padding-right:0px;
+	width:60% !important;
+    }
+    
+    .navbar-right{
+	margin-right:170px;
+    }
 }
 
 @media (max-width:768px){
-	.nav{
-		width:100% !important;
-		margin:auto;
-	}
-	
-	.navbar-form{
-		width:100% !important;
-		padding-left:10px;
-	}
+    .nav{
+	width:100% !important;
+	margin:auto;
+    }
+    
+    .navbar-form{
+	width:100% !important;
+	padding-left:10px;
+    }
 }
+

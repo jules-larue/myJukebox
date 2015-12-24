@@ -33,7 +33,7 @@ class Album(db.Model):
     
 
     def __repr__(self):
-        return "<Album %s, par %s (%d), genre : %s>" % (self.titre, self.artiste.nom, self.annee, self.genre.name)
+        return "<Album %s, par %s (%d)>" % (self.titre, self.artiste.nom, self.annee)
 
 
 bibliotheque = db.Table("bibliotheque",
@@ -59,3 +59,14 @@ class Utilisateur(db.Model):
 def get_albums(page):
     """ renvoie tous les albums de la base paginés """
     return Album.query.paginate(page, 12, False)
+
+
+def get_album_by_id(id):
+    """ renvoie l'album avec l'id passé en paramètre """
+    return Album.query.filter(Album.id==id).one()
+
+
+def get_some_albums_by_artist(album_id):
+    """ renvoie quelques albums (4 maximums) de l'artiste associé à l'id de l'album passé en paramètre """
+    idArtiste = Album.query.filter(Album.id==album_id).one().artiste_id
+    return Album.query.filter((Album.artiste_id==idArtiste) & (Album.id!=album_id)).limit(4).all()

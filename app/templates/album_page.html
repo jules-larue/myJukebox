@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='album_page.css') }}" />
+{% endblock %}
+
+{% block title %} {{ album.titre }} {% endblock %}
+
+{% block main %}
+<div class="infos-row row">
+  
+  <div class="col-xl-5 col-sm-6 col-xs-12"> <!-- L'image de l'album -->
+    <img src="{{ url_for('static', filename='non_disponible.jpg') }}" alt="Image de l'album" />
+  </div>
+
+  <div class="col-xl-7 col-sm-6 col-xs-12 infos"> <!-- Les informations de l'album -->
+    <h1>{{ album.titre }}</h1>
+
+    <h2>Par : <i>{{album.artiste.nom}}</i></h2>
+
+    <h2>Sorti en <i>{{album.annee}}</i></h2>
+
+    <h2 id="genres">Genres :
+      <i>
+      {% for genre in album.genres %}
+      {{genre.nom}}, 
+      {% endfor %}
+      </i>
+    </h2>
+    
+    <button type="button" class="ajout btn btn-success"><span class="glyphicon glyphicon-heart-empty"></span> Ajouter à ma collection</button> <!-- Bouton pour ajouter le titre aux favoris -->
+  </div><!-- Fin bloc infos de l'album -->
+</div>
+
+
+<div class="autres-albums-artiste-row row"> <!-- Les autres albums de l'artiste -->
+  <h1>Autres albums de {{album.artiste.nom}}</h1>
+  {% for album in otherAlbumsFromArtist %}
+  <div class="col-sm-3 col-xs-6">
+    <a href="/albums/album/{{album.id}}">
+      <img src="{{ url_for('static', filename='non_disponible.jpg') }}" alt="Image d'album" />
+      <h2 class="titreAutre">{{album.titre}}</h2>
+    </a>
+  </div><!-- Fin col -->
+  {% endfor %}
+</div><!-- Fin row -->
+
+
+{% endblock %}<!-- Fin bloc main -->
+
+
+{% block js %}
+curTab = "albums-tab"
+{% endblock %}
+
