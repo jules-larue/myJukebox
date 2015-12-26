@@ -9,6 +9,7 @@ h2{
 
 .row{
     margin-top:50px;
+    text-align:center;
 }
 
 .page-link{
@@ -30,27 +31,13 @@ h2{
     text-decoration:none;
 }
 
-.row img{
-    width:90%;
-    height:75%;
-    margin-top:60px;
-    border-radius:35px;
-}
-
-.row{
-    text-align: center;
-}
-
-.row a:hover{
-    text-decoration:none;
-}
-
 h3{
     font-size:1.3em;
     width:85%;
     margin:auto;
     margin-top:18px;
 }
+
 
 .pagination{
     /* Centrage de la liste des liens de pagination */
@@ -79,13 +66,8 @@ h3{
 }
 
 @media (max-width:768px){
-    .row img{
-	width:60%;
-	height:40%;
-    }
-    
     .num-link{
-	/* On cache les autres numéros quand l'écran n'est pas assez large pour aggner de la place */
+	/* On cache les autres numéros quand l'écran n'est pas assez large pour gagner de la place */
 	display:none;
     }
 }

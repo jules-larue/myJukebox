@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='resultats_base.css') }}" />
+{% endblock %}
+
+{% block title %}Artistes{% endblock %}
+
+{% block main %}
+
+
+{% block pagination_info %}<h2>Page {{page}} sur {{resultats.pages}}</h2>{% endblock %}
+
+<!-- Section avec tous les résultats -->
+{% block div_row %}
+{% endblock %}
+
+
+{% block pagination_info_bottom %}<h2>Page {{page}} sur {{resultats.pages}}</h2>{% endblock %}
+
+<!-- Le bloc de pagination -->
+{% block pagination %}
+<ul class="pagination">
+
+<!-- Page précédente -->
+{% if page>1 %}
+<li>
+      <a href="{{ url_for(nom_resultat, page=resultats.prev_num) }}" class="page-link" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+</li>
+{% endif %}
+
+<!-- Deux pages avant -->
+{% if page>2 %}
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, page=resultats.prev_num-1) }}">{{resultats.prev_num-1}}</a></li>
+{% endif %}
+
+<!-- Numéro précedent -->
+{% if resultats.has_prev %}
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, page=resultats.prev_num) }}">{{resultats.prev_num}}</a></li>
+{% endif %}
+
+<!-- Le numéro de page courante -->
+<li><a class="page-link active" href="#">{{page}}</a></li>
+
+<!-- Numéro suivant -->
+{% if resultats.has_next %}
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, page=resultats.next_num) }}">{{resultats.next_num}}</a></li>
+{% endif %}
+
+<!-- Deux pages après -->
+{% if page<=resultats.pages-2 %}
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, page=resultats.next_num+1) }}">{{resultats.next_num+1}}</a></li>
+{% endif %}
+
+<!-- Page suivante -->
+{% if page<resultats.pages %}
+<li>
+      <a href="{{ url_for(nom_resultat, page=resultats.next_num) }}" class="page-link" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+</li>
+{% endif %}
+</ul> <!-- Fin de la pagination ul -->
+{% endblock %}<!-- Fin bloc pagination -->
+
+{% endblock %} <!-- FIn du bloc main -->

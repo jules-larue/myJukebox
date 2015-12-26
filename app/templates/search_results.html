@@ -1,25 +1,41 @@
-{% extends "albums.html" %}
-
+{% extends "resultats_base.html" %}
 {% block styles %}
-{{super()}}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='resultats_cover.css') }}" /> <!-- Un CSS spécifique aux résultats avec des covers d'albums -->
 {% endblock %}
 
-{% block title %}Résultats de recherche{% endblock %}
+{% block title %}Résultats de la recherche {{query}}{% endblock %}
 
 {% block main %}
+
+<h1>Résultats de la recherche <b>{{query}}</b></h1>
+
+{% block pagination_info %} {{ super() }} {% endblock %}
+
+{% block div_row %}
 {{super()}}
-{% block h1 %}Résultats de la recherche <b>{{query}}</b>{% endblock %}
-{% endblock %}
+<div class="row">
+  {% for resultat in resultats.items %}
+  <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+    <a href=" {{ url_for('album', id=resultat.id) }}">
+      <!-- On montre un aperçu spécial pour le moment (la vraie cover sera mise à l'IUT) -->
+      <img src=" {{ url_for('static', filename='non_disponible.jpg') }}" />
+      <h3>{{resultat.titre}}</h3>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}<!-- Fin div_row -->
 
+{% block pagination_info_bottom %} {{ super() }} {% endblock %}
 
-<!-- Bloc pour les liens de pagination -->
 {% block pagination %}
 <ul class="pagination">
 
 <!-- Page précédente -->
 {% if page>1 %}
 <li>
-      <a href="{{ url_for('recherche_resultats', query=query, page=albums.prev_num) }}" class="page-link" aria-label="Previous">
+      <a href="{{ url_for(nom_resultat,query=query, page=resultats.prev_num) }}" class="page-link" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
 </li>
@@ -27,39 +43,39 @@
 
 <!-- Deux pages avant -->
 {% if page>2 %}
-<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.prev_num-1) }}">{{albums.prev_num-1}}</a></li>
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, query=query, page=resultats.prev_num-1) }}">{{resultats.prev_num-1}}</a></li>
 {% endif %}
 
 <!-- Numéro précedent -->
-{% if albums.has_prev %}
-<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.prev_num) }}">{{albums.prev_num}}</a></li>
+{% if resultats.has_prev %}
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, query=query, page=resultats.prev_num) }}">{{resultats.prev_num}}</a></li>
 {% endif %}
 
 <!-- Le numéro de page courante -->
 <li><a class="page-link active" href="#">{{page}}</a></li>
 
 <!-- Numéro suivant -->
-{% if albums.has_next %}
-<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.next_num) }}">{{albums.next_num}}</a></li>
+{% if resultats.has_next %}
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, query=query, page=resultats.next_num) }}">{{resultats.next_num}}</a></li>
 {% endif %}
 
 <!-- Deux pages après -->
-{% if page<=albums.pages-2 %}
-<li><a class="page-link num-link" href="{{ url_for('recherche_resultats', query=query, page=albums.next_num+1) }}">{{albums.next_num+1}}</a></li>
+{% if page<=resultats.pages-2 %}
+<li><a class="page-link num-link" href="{{ url_for(nom_resultat, query=query, page=resultats.next_num+1) }}">{{resultats.next_num+1}}</a></li>
 {% endif %}
 
 <!-- Page suivante -->
-{% if page<albums.pages %}
+{% if page<resultats.pages %}
 <li>
-      <a href="{{ url_for('recherche_resultats', query=query, page=albums.next_num) }}" class="page-link" aria-label="Next">
+      <a href="{{ url_for(nom_resultat, query=query, page=resultats.next_num) }}" class="page-link" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
 </li>
 {% endif %}
 </ul> <!-- Fin de la pagination ul -->
+{% endblock %}
 
-{% endblock %} <!-- Fin bloc pagination -->
-
+{% endblock %} <!-- Fin bloc main -->
 
 {% block js %}
 curTab = "albums-tab"

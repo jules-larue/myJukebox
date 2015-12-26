@@ -1,0 +1,19 @@
+.row img{ /* UNIQUEMENT RESULTATS COVERS */
+    width:90%;
+    height:75%;
+    margin-top:60px;
+    border-radius:35px;
+}
+
+
+.row a:hover{  /* UNIQUEMENT RESULTATS COVERS */
+    text-decoration:none;
+}
+
+
+@media (max-width:768px){
+    .row img{
+	width:60%;
+	height:40%;
+    }
+}

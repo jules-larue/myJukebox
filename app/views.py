@@ -15,8 +15,9 @@ def home():
 @app.route("/albums/<int:page>")
 def albums(page=1):
 	return render_template("albums.html",
-	page=page,
-	albums=get_albums(page))
+	                       page=page,
+                               resultats=get_albums(page),
+                               nom_resultat='albums')
 
 
 @app.route("/albums/album/<int:id>")
@@ -39,7 +40,8 @@ def recherche_resultats(query, page=1):
     results = get_results_of_search(query, page)
     return render_template('search_results.html',
                            query=query,
-                           albums=results,
+                           resultats=results,
+                           nom_resultat='recherche_resultats',
                            page=page)
 
 
@@ -49,4 +51,5 @@ def recherche_resultats(query, page=1):
 def artistes(page=1):
     return render_template("artistes.html",
                            page=page,
-                           artistes=get_all_artists(page))
+                           resultats=get_all_artists(page),
+                           nom_resultat='artistes')

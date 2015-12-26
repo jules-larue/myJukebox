@@ -1,0 +1,19 @@
+.row{
+    margin-bottom:40px;
+    text-align:left;
+}
+
+.row div{
+    margin-bottom:5px;
+}
+
+@media (max-width:768px){
+
+    h1{
+	text-align:center;
+    }
+
+    .row{
+	text-align:center;
+    }
+}
