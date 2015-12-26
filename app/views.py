@@ -1,5 +1,5 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists
 from flask import render_template, g, redirect, url_for
 
 @app.before_request
@@ -41,3 +41,12 @@ def recherche_resultats(query, page=1):
                            query=query,
                            albums=results,
                            page=page)
+
+
+
+@app.route("/artistes")
+@app.route("/artistes/<int:page>")
+def artistes(page=1):
+    return render_template("artistes.html",
+                           page=page,
+                           artistes=get_all_artists(page))

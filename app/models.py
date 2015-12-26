@@ -83,3 +83,8 @@ def get_some_albums_by_artist(album_id):
 def get_results_of_search(research, page):
     """ renvoie tous les albums dont le titre contient une partie de la recherche (ou est égal à la recherche)"""
     return Album.query.filter(sqlalchemy.func.lower(Album.titre).contains(research.lower())).paginate(page, 12, False)
+
+
+def get_all_artists(page):
+    """ renvoie une liste paginée de tous les artistes de la base, situés au numéro de page spécifié en paramètre """
+    return Artiste.query.order_by(Artiste.nom).paginate(page, 40, False)

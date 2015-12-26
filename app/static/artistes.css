@@ -1,0 +1,79 @@
+.main{
+    margin-top:100px;
+}
+
+h2{
+    color:#858585;
+    font-size:1.7em;
+}
+
+.row{
+    margin-top:40px;
+    margin-bottom:40px;
+}
+
+.row div{
+    margin-bottom:5px;
+}
+
+.page-link{
+    display:inline-block;
+    padding:10px;
+    margin-top:30px;
+    margin:auto;
+    width:80px;
+    vertical-align:middle;
+    height:50px;
+    background:#ededed;
+    text-decoration:none;
+    border-radius:5px;
+    font-size:25px;
+}
+
+
+.page-link:hover{
+    text-decoration:none;
+}
+
+
+.pagination{
+    /* Centrage de la liste des liens de pagination */
+    display:block;
+    width:100% !important;
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.pagination li{
+    display:inline-block;
+    text-align:center;
+}
+
+.pagination .active{
+    /* Le numéro de la page active est non cliquable et en noir */
+    color:black;
+    pointer-events: none;
+    cursor: default;
+}
+
+.pagination .active:hover{
+    color:black;
+    text-decoration:none;
+}
+
+@media (max-width:768px){
+
+    h1{
+	text-align:center;
+    }
+
+    .row{
+	text-align:center;
+    }
+    
+    .num-link{
+	/* On cache les autres numéros quand l'écran n'est pas assez large pour aggner de la place */
+	display:none;
+    }
+}

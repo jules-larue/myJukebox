@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='artistes.css') }}" />
+{% endblock %}
+
+{% block title %}Artistes{% endblock %}
+
+{% block main %}
+<h1>Tous nos artistes</h1>
+
+<h2>Page {{page}} sur {{artistes.pages}}</h2>
+
+<!-- Section avec tous les artistes -->
+<div class="row">
+  {% for artiste in artistes.items %}
+  <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+    <a href="#">{{artiste.nom}}</a>
+  </div>
+  {% endfor %}
+</div>
+
+<h2>Page {{page}} sur {{artistes.pages}}</h2>
+
+<!-- Le bloc de pagination -->
+<ul class="pagination">
+
+<!-- Page précédente -->
+{% if page>1 %}
+<li>
+      <a href="{{ url_for('artistes', page=artistes.prev_num) }}" class="page-link" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+</li>
+{% endif %}
+
+<!-- Deux pages avant -->
+{% if page>2 %}
+<li><a class="page-link num-link" href="{{ url_for('artistes', page=artistes.prev_num-1) }}">{{artistes.prev_num-1}}</a></li>
+{% endif %}
+
+<!-- Numéro précedent -->
+{% if artistes.has_prev %}
+<li><a class="page-link num-link" href="{{ url_for('artistes', page=artistes.prev_num) }}">{{artistes.prev_num}}</a></li>
+{% endif %}
+
+<!-- Le numéro de page courante -->
+<li><a class="page-link active" href="#">{{page}}</a></li>
+
+<!-- Numéro suivant -->
+{% if artistes.has_next %}
+<li><a class="page-link num-link" href="{{ url_for('artistes', page=artistes.next_num) }}">{{artistes.next_num}}</a></li>
+{% endif %}
+
+<!-- Deux pages après -->
+{% if page<=artistes.pages-2 %}
+<li><a class="page-link num-link" href="{{ url_for('artistes', page=artistes.next_num+1) }}">{{artistes.next_num+1}}</a></li>
+{% endif %}
+
+<!-- Page suivante -->
+{% if page<artistes.pages %}
+<li>
+      <a href="{{ url_for('artistes', page=artistes.next_num) }}" class="page-link" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+</li>
+{% endif %}
+</ul> <!-- Fin de la pagination ul -->
+
+{% endblock %} <!-- FIn du bloc main -->
+
+{% block js %}
+curTab = "artistes-tab"
+{% endblock %}
