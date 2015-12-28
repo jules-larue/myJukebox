@@ -1,0 +1,39 @@
+{% extends "resultats_base.html" %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='resultats_cover.css') }}" /> <!-- Un CSS spécifique aux résultats avec résultats de liens textes uniquement -->
+{% endblock %}
+
+{% block title %}Albums de {{artiste.nom}}{% endblock %}
+
+{% block main %}
+
+<h1>Tous les albums de {{artiste.nom}}</h1>
+
+{% block pagination_info %} {{ super() }} {% endblock %}
+
+{% block div_row %}
+{{super()}}
+<div class="row">
+  {% for resultat in resultats.items %}
+  <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+    <a href=" {{ url_for('album', id=resultat.id) }}">
+      <!-- On montre un aperçu spécial pour le moment (la vraie cover sera mise à l'IUT) -->
+      <img src=" {{ url_for('static', filename='non_disponible.jpg') }}" />
+      <h3>{{resultat.titre}}</h3>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}<!-- Fin div_row -->
+
+{% block pagination_info_bottom %} {{ super() }} {% endblock %}
+
+{% block pagination %}{{super()}}{% endblock %}
+
+
+{% endblock %} <!-- Fin bloc main -->
+
+{% block js %}
+curTab = "artistes-tab"
+{% endblock %}

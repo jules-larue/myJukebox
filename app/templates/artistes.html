@@ -18,7 +18,7 @@
 <div class="row">
   {% for resultat in resultats.items %}
   <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
-    <a href="#">{{resultat.nom}}</a>
+    <a href=" {{ url_for('albums_artiste', id=resultat.id, page=1) }} ">{{resultat.nom}}</a>
   </div>
   {% endfor %}
 </div>

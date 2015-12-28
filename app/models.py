@@ -88,3 +88,12 @@ def get_results_of_search(research, page):
 def get_all_artists(page):
     """ renvoie une liste paginée de tous les artistes de la base, situés au numéro de page spécifié en paramètre """
     return Artiste.query.order_by(Artiste.nom).paginate(page, 40, False)
+
+def get_artist(id):
+    """ renvoie l'artiste avec l'id spécifié en paramètre """
+    return Artiste.query.filter(Artiste.id==id).one()
+
+def get_albums_by_artist(idArtiste, page):
+    """ renvoie une liste paginée de tous les albums de l'artiste passé en paramètre, et de la page spécifiée """
+    artiste = get_artist(idArtiste)
+    return Album.query.filter(Album.artiste_id==artiste.id).order_by(Album.titre).paginate(page, 12, False)
