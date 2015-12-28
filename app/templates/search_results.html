@@ -8,10 +8,20 @@
 
 {% block main %}
 
+
 <h1>Résultats de la recherche <b>{{query}}</b></h1>
 
-{% block pagination_info %} {{ super() }} {% endblock %}
+{% if resultats.pages==0 %} <!-- On indique qu'aucun résultat n'a été trouvé -->
+<p class="bg-info">Aucun résultat trouvé</p>
+{% endif %}
 
+
+{% if resultats.pages>0 %}
+{% block pagination_info %} {{ super() }} {% endblock %}
+{% endif %}
+
+
+{% if resultats.pages>0 %}
 {% block div_row %}
 {{super()}}
 <div class="row">
@@ -26,8 +36,12 @@
   {% endfor %}
 </div>
 {% endblock %}<!-- Fin div_row -->
+{% endif %}
 
+{% if resultats.pages>0 %}
 {% block pagination_info_bottom %} {{ super() }} {% endblock %}
+{% endif %}
+
 
 {% block pagination %}
 <ul class="pagination">
@@ -76,6 +90,7 @@
 {% endblock %}
 
 {% endblock %} <!-- Fin bloc main -->
+
 
 {% block js %}
 curTab = "albums-tab"

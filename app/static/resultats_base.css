@@ -65,6 +65,16 @@ h3{
     text-decoration:none;
 }
 
+p{
+    /* Texte "Aucun résultat trouvé" */
+    text-align:center;
+    font-size:2em;
+    margin: 50px auto;
+    color:#7a0002;
+    width:50%;
+    border-radius:8px;
+}
+
 @media (max-width:768px){
     .num-link{
 	/* On cache les autres numéros quand l'écran n'est pas assez large pour gagner de la place */
