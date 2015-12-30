@@ -3,6 +3,9 @@ from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired
 import sqlalchemy
+from hashlib import sha256
+from flask.ext.login import UserMixin
+from .app import login_manager
 
 class Artiste(db.Model):
     id  = db.Column(db.Integer, primary_key=True)
@@ -45,10 +48,13 @@ bibliotheque = db.Table("bibliotheque",
                         db.Column('login', db.String(20), db.ForeignKey("utilisateur.login"))
                         )
 
-class Utilisateur(db.Model):
+class Utilisateur(db.Model, UserMixin):
     login    = db.Column(db.String(20), primary_key=True)
     password = db.Column(db.String(25))
     albums   = db.relationship("Album", secondary=bibliotheque, backref=db.backref("albums", lazy="dynamic"))
+
+    def get_id(self):
+        return self.login
 
 
     def __repr__(self):
@@ -110,3 +116,8 @@ def get_albums_by_artist(idArtiste, page):
     """ renvoie une liste paginée de tous les albums de l'artiste passé en paramètre, et de la page spécifiée """
     artiste = get_artist(idArtiste)
     return Album.query.filter(Album.artiste_id==artiste.id).order_by(Album.titre).paginate(page, 12, False)
+
+
+@login_manager.user_loader
+def load_user(username):
+    return Utilisateur.query.get(username)

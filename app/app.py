@@ -2,6 +2,7 @@
 from flask import Flask
 from flask.ext.script import Manager
 from flask.ext.bootstrap import Bootstrap
+from flask.ext.login import LoginManager
 
 
 app = Flask(__name__) # The Flask application
@@ -25,3 +26,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = ('sqlite:///'+mkpath('../app.db'))
 db=SQLAlchemy(app)
 
 app.config['SECRET_KEY'] = "ca4fea79-f05e-4f0c-af86-261fd3b830c5"
+
+
+""" LOGIN MANAGER """
+login_manager = LoginManager(app)
