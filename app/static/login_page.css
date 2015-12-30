@@ -1,6 +1,28 @@
+body{
+    background:url('guitar.jpg');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
 label{
     text-align:center;
     font-size:1.2em;
+    color: #bf0105;
+}
+
+.main form{
+    text-align:center;
+    vertical-align:middle;
+    padding: 25px;
+    height: 280px !important;
+    width: 70%;
+    border: 2px solid red;
+    margin: 0 auto 30px auto;
+    border-radius: 15px;
+    background-color: #000;
+    opacity: 0.9;
 }
 
 .main .input{
@@ -9,12 +31,12 @@ label{
 }
 
 .main input{
-    width: 35% !important;
+    width: 75% !important;
     margin:0 auto 25px auto;
 }
     
 .main{
-    margin-top:100px !important;
+    margin-top: 130px !important;
 }
 
 .connexion{
@@ -22,9 +44,20 @@ label{
     margin:auto;
 }
 
+.main button{
+    background: #ed8a00;
+}
+
 @media (max-width:768px){
+    body{
+	background-size: auto;
+	height: 100%;
+    }
     .main input{
 	width:100% !important;
     }
-    
+
+    .main form{
+	width: 100%;
+    }
 }
