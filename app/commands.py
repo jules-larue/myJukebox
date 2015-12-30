@@ -56,16 +56,14 @@ def loaddb(filename):
     print("Travail terminé !")
 
 
-"""
-    # liaison des genres aux albums
-    print("Début de la liaison genres <-> albums")
-    apparus = set() # couples (idGenre, idAlbum) déjà apparus
-    for album in albums:
-        for genre in album["genre"]:
-            if (genres[genre].id, album["entryId"]) not in apparus:
-                lien = GenreAlbum(genre_id=genres[genre].id, album_id=album["entryId"])
-                db.session.add(lien)
-                apparus.add((genres[genre].id, album["entryId"]))
-    db.session.commit()
-"""
 
+@manager.command
+def newuser(login, password):
+    """ ajoute un utilisateur à la base de données """
+    from .models import Utilisateur
+    from hashlib import sha256
+    m = sha256() # objet pour encrypter les mots de passe
+    m.update(password.encode())
+    u = Utilisateur(login=login, password=m.hexdigest())
+    db.session.add(u)
+    db.session.commit()
