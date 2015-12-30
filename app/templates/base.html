@@ -36,15 +36,23 @@
         </div>
       </form>
       
-      <div class="navbar-right navbar-text">
-	<a href="#" id="login-link">
-	  <span id="login-link">Log in</span>
+      <div class="nav navbar-right navbar-text">
+	{% if current_user.is_authenticated %} <!-- Il y a un utilisateur connecté -->
+	<a id="loginInfo">{{ current_user.login }}</a>
+	<a href="#">
+	  <span class="glyphicon glyphicon-log-out" title="Logout"></span>
+	</a>
+	
+	{% else %} <!-- Aucun utilisateur n'est connecté -->
+	<a href="{{ url_for('login') }}" id="login-link">
+	  <span id="login-link">Connexion</span>
 	  <span class="glyphicon glyphicon-log-in" title="Login"></span>
 	</a>
+	{% endif %}
       </div>
-      
-    </div><!--/.nav-collapse -->
-  </div>
+    
+  </div><!--/.nav-collapse -->
+</div>
 </nav>
 {% endblock %}
 {% block content %}

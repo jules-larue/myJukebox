@@ -35,13 +35,20 @@ nav ul{
     width:100%;
 }
 
+
+#loginInfo:hover{
+    text-decoration:none;
+    pointer-events: none;
+    cursor: default;
+}
+
 @media (max-width:1202px) and (min-width:993px){
     nav ul{
 	width:50%;
     }
     
     .navbar-form{
-	width:30% !important;
+	width:26% !important;
     }
 }
 
