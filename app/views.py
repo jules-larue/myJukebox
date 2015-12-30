@@ -1,6 +1,8 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm
 from flask import render_template, g, redirect, url_for
+from flask.ext.login import login_user
+
 
 @app.before_request
 def before_request():
@@ -63,3 +65,18 @@ def albums_artiste(id=1, page=1):
                            page=page,
                            resultats=get_albums_by_artist(id, page),
                            artiste = get_artist(id))
+
+
+
+@app.route("/login/", methods=("GET", "POST"))
+def login():
+    loginForm = LoginForm() # the login form
+    if loginForm.validate_on_submit():
+        user = loginForm.get_authentificated_user()
+        if user:
+            # si un utilisateur est déjà authentifié et va à l'URL "/login" on le redirige vers la page "/home"
+            login_user(user)
+            return redirect(url_for("home"))
+    return render_template(
+        "login_page.html",
+        form = loginForm)

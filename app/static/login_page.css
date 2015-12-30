@@ -1,0 +1,30 @@
+label{
+    text-align:center;
+    font-size:1.2em;
+}
+
+.main .input{
+    margin:auto;
+    text-align:center;
+}
+
+.main input{
+    width: 35% !important;
+    margin:0 auto 25px auto;
+}
+    
+.main{
+    margin-top:100px !important;
+}
+
+.connexion{
+    text-align:center;
+    margin:auto;
+}
+
+@media (max-width:768px){
+    .main input{
+	width:100% !important;
+    }
+    
+}

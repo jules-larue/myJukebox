@@ -1,6 +1,6 @@
 from app import db
 from flask.ext.wtf import Form
-from wtforms import StringField
+from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired
 import sqlalchemy
 
