@@ -58,6 +58,19 @@ class SearchForm(Form):
     search = StringField("Recherche", validators=[DataRequired()])
     
 
+class LoginForm(Form):
+    login = StringField('Login')
+    password = PasswordField('Mot de passe')
+
+    def get_authentificated_user(self):
+        user = Utilisateur.query.get(self.login.data)
+        if user is None:
+            return None
+        else:
+            m = sha256()
+            m.update(self.password.data.encode())
+            passwd = m.hexdigest()
+            return user if passwd == user.password else None
 
 
 ###################################
