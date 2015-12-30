@@ -7,7 +7,7 @@
 {% block title %}Authentification{% endblock %}
 
 {% block main %}
-<form role="form" method="POST" action="">
+<form role="form" method="POST" action=" {{ url_for('login') }} ">
   {{ form.hidden_tag() }}
   <div class="form-group">
     <label for="username" class="col-sm-12 control-label">{{ form.login.label }}</label>
