@@ -1,7 +1,7 @@
 from .app import app
 from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm
 from flask import render_template, g, redirect, url_for
-from flask.ext.login import login_user
+from flask.ext.login import login_user, logout_user
 
 
 @app.before_request
@@ -80,3 +80,9 @@ def login():
     return render_template(
         "login_page.html",
         form = loginForm)
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
