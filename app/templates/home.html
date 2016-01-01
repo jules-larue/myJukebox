@@ -22,7 +22,9 @@
           <div class="carousel-caption">
             <h1 id="rock-font">Let's rooock !</h1>
             <p>La plus belle bibliothèques de titres audio pour tous les amateurs de pure musique rock.</p>
+	    {% if not current_user.is_authenticated %}
             <p><a class="btn btn-lg btn-primary" href="#" role="button">Inscrivez-vous maintenant !</a></p>
+	    {% endif %}
 	    <div class="filler"></div>
           </div>
 	</div>
