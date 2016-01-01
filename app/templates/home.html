@@ -35,6 +35,9 @@
           <div class="carousel-caption">
             <h1>Une communauté de fans.</h1>
             <p>Notre collection est alimentée par des amateurs qui, comme vous, ont le rock dans la peau.</p>
+	    {% if not current_user.is_authenticated %}
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Inscrivez-vous maintenant !</a></p>
+	    {% endif %}
 	    <div class="filler"></div>
           </div>
 	</div>
@@ -45,6 +48,9 @@
           <div class="carousel-caption">
             <h1>Une bibliothèque à vous.</h1>
             <p>Créez votre bibliothèque personnelle et rendez-là unique. Distinguez-vous.</p>
+	    {% if not current_user.is_authenticated %}
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Inscrivez-vous maintenant !</a></p>
+	    {% endif %}
 	    <div class="filler"></div>
           </div>
 	</div>
