@@ -118,6 +118,15 @@ def get_albums_by_artist(idArtiste, page):
     return Album.query.filter(Album.artiste_id==artiste.id).order_by(Album.titre).paginate(page, 12, False)
 
 
+def are_ids_ok(login, password):
+    """ renvoie si la combinaison login/password passée en paramètre existe dans la base de données """
+    try:
+        Utilisateur.query.filter(Utilisateur.login==login & Utilisateur.password==password).one()
+        return True # si succès, on arrive ici
+    except:
+        return False # si échec on arrive ici
+    
+
 @login_manager.user_loader
 def load_user(username):
     return Utilisateur.query.get(username)
