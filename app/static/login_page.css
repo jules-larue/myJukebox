@@ -48,6 +48,16 @@ label{
     background: #ed8a00;
 }
 
+.bg-danger{
+    text-align:center;
+    border: 2px red solid;
+    vertical-align:middle;
+    font-size:1.25em;
+    width: 30%;
+    margin:0 auto 20px auto;
+    background-color: #ff3f3f;
+}
+
 @media (max-width:768px){
     body{
 	background-size: auto;
@@ -59,5 +69,9 @@ label{
 
     .main form{
 	width: 100%;
+    }
+
+    .bg-danger{
+	width: 50%;
     }
 }

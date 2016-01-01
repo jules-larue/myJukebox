@@ -7,6 +7,12 @@
 {% block title %}Authentification{% endblock %}
 
 {% block main %}
+
+<!-- Affichage d'un message d'erreur -->
+{% if not ids_ok %}
+<p class="bg-danger">Identifiants incorrects.</p>
+{% endif %}
+
 <form role="form" method="POST" action=" {{ url_for('login') }} ">
   {{ form.hidden_tag() }}
   <div class="form-group">
@@ -29,6 +35,9 @@
     </div>
   </div>
 </form>
+
+
+
 {% endblock %}
 
 {% block js %}

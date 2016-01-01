@@ -1,5 +1,5 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok
 from flask import render_template, g, redirect, url_for
 from flask.ext.login import login_user, logout_user
 
@@ -77,9 +77,13 @@ def login():
             # si un utilisateur est déjà authentifié et va à l'URL "/login" on le redirige vers la page "/home"
             login_user(user)
             return redirect(url_for("home"))
+    ids_ok = True
+    if loginForm.login.data != None and loginForm.password.data != None:
+        ids_ok = are_ids_ok(loginForm.login.data, loginForm.password.data)
     return render_template(
         "login_page.html",
-        form = loginForm)
+        form = loginForm,
+        ids_ok = ids_ok)
 
 
 @app.route("/logout")
