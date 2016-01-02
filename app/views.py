@@ -1,13 +1,17 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song
 from .commands import newuser
 from flask import render_template, g, redirect, url_for
-from flask.ext.login import login_user, logout_user
+from flask.ext.login import login_user, logout_user, current_user
 
 
 @app.before_request
 def before_request():
     g.searchForm = SearchForm()
+    if current_user.is_authenticated:
+        g.user = current_user.get_id() # return login
+    else:
+        g.user = None
 
 
 @app.route("/home")
@@ -25,8 +29,12 @@ def albums(page=1):
 
 @app.route("/albums/album/<int:id>")
 def album(id):
+    deja_possede = None
+    if g.user != None:
+        deja_possede = user_has_song(g.user, id)
     return render_template("album_page.html",
                            album=get_album_by_id(id),
+                           deja_possede = deja_possede,
                            otherAlbumsFromArtist = get_some_albums_by_artist(id))
 
 

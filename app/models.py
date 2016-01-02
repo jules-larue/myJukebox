@@ -140,6 +140,7 @@ def login_exists(login):
 def user_has_song(loginUser, idAlbum):
     """ renvoie si un utilisateur possède un album dans sa bibliothèque """
     albums = Utilisateur.query.filter(Utilisateur.login==loginUser).one().albums # les albums de l'utilisateur
+    print(albums)
     for album in albums:
         if album.id==idAlbum:
             return True

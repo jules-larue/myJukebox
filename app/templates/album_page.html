@@ -28,8 +28,18 @@
       {% endfor %}
       </i>
     </h2>
-    
-    <button type="button" class="ajout btn btn-success"><span class="glyphicon glyphicon-heart-empty"></span> Ajouter à ma collection</button> <!-- Bouton pour ajouter le titre aux favoris -->
+
+    {% if not current_user.is_authenticated %} <!-- Aucun utilisateur authentifié -->
+    <button type="button" class="ajout btn btn-success" action=""><span class="glyphicon glyphicon-heart-empty"></span> Ajouter à ma collection</button> <!-- Bouton pour ajouter le titre aux favoris -->
+
+    {% elif current_user.is_authenticated and deja_possede %} <!-- Utilisateur connecté qui possède l'album dans sa bibliothèque -->
+    <button type="button" class="ajout btn btn-success" disabled="disabled"><span class="glyphicon glyphicon-ok"></span> Vous possédez déjà cet album</button>
+
+    {% else %} <!-- Utilisateur connecté qui ne possède pas l'album -->
+    <button type="button" class="ajout btn btn-success" action=""><span class="glyphicon glyphicon-heart-empty"></span> Ajouter à ma collection</button>
+
+    {% endif %}
+    {{deja_ajoute}}
   </div><!-- Fin bloc infos de l'album -->
 </div>
 
