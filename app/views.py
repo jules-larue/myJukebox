@@ -98,6 +98,7 @@ def nouvel_utilisateur():
                                        user_exists = True)
             else: # sinon on ajoute l'utilisateur et on retourne sur la page home
                 newuser(new_user.login, new_user.password)
+                login_user(new_user) # après inscription, on se connecte directement au site
                 return redirect(url_for("home"))
     return render_template(
         "inscription_page.html",
