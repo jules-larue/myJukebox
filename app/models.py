@@ -140,11 +140,18 @@ def login_exists(login):
 def user_has_song(loginUser, idAlbum):
     """ renvoie si un utilisateur possède un album dans sa bibliothèque """
     albums = Utilisateur.query.filter(Utilisateur.login==loginUser).one().albums # les albums de l'utilisateur
-    print(albums)
     for album in albums:
         if album.id==idAlbum:
             return True
     return False
+
+def ajouter_album_bibliotheque(loginUser, idAlbum):
+    """ ajoute un album à la bibliothèque d'un utilisateur """
+    user  = Utilisateur.query.filter(Utilisateur.login==loginUser).one()
+    album = Album.query.filter(Album.id==idAlbum).one()
+    user.albums.append(album) # ajout de l'album à la bibliothèque de l'utilisateur
+    db.session.add(user)
+    db.session.commit()
 
 @login_manager.user_loader
 def load_user(username):
