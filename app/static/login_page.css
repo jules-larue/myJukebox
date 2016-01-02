@@ -58,6 +58,19 @@ label{
     background-color: #ff3f3f;
 }
 
+.new-account{
+    display:block;
+    text-align:center;
+    width: 20%;
+    font-size: 1.15em;
+    margin:auto;
+    padding:10px;
+    color: #fff;
+    border: 1px solid #0d5191;
+    border-radius:5px;
+    background-color:#0d5da8;
+}
+
 @media (max-width:768px){
     body{
 	background-size: auto;
