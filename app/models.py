@@ -154,6 +154,14 @@ def ajouter_album_bibliotheque(loginUser, idAlbum):
     db.session.add(user)
     db.session.commit()
 
+def get_collection(loginUser, page):
+    """ renvoie la collection paginée d'albums d'un utilisateur """
+    albums = Utilisateur.query.filter(Utilisateur.login==loginUser).one().albums # liste des albums de la collection de l'utilisateur (NON PAGINEE)
+    ids = [album.id for album in albums] # les ids d'albums de la bibliothèque de l'utilisateur
+    albums = Album.query.filter(Album.id.in_(ids)).paginate(page, 24, False) # la liste paginée des albums de la bibliothèque de l'utilisateur
+    return albums
+    
+
 @login_manager.user_loader
 def load_user(username):
     return Utilisateur.query.get(username)
