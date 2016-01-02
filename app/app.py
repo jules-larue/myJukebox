@@ -30,3 +30,4 @@ app.config['SECRET_KEY'] = "ca4fea79-f05e-4f0c-af86-261fd3b830c5"
 
 """ LOGIN MANAGER """
 login_manager = LoginManager(app)
+login_manager.login_view = "login" # vue renvoyée par défaut quand on est pas authentifié et qu'on accède à une vue non autorisée
