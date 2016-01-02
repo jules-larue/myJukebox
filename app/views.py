@@ -1,5 +1,5 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song, ajouter_album_bibliotheque
 from .commands import newuser
 from flask import render_template, g, redirect, url_for
 from flask.ext.login import login_user, logout_user, current_user
@@ -113,6 +113,17 @@ def nouvel_utilisateur():
         form = form,
         user_exists = False)
 
+
+@app.route("/ajout-album-bibliotheque/<int:idAlbum>")
+def ajout_album_bibliotheque(idAlbum):
+    print("coucou")
+    if current_user.is_authenticated:
+        # si un utilisateur est connecté, on ajoute la chanson
+        loginUser = current_user.login
+        ajouter_album_bibliotheque(loginUser, idAlbum)
+        return redirect(url_for("album", id=idAlbum)) # on redirige vers la page de l'album
+    else:
+        return redirect(url_for("home")) # sinon on redirige à l'accueil pour l'instant
 
 @app.route("/logout")
 def logout():
