@@ -21,8 +21,10 @@
         <li id="artistes-tab"><a href="{{ url_for('artistes') }}">Artistes</a></li>
         <li id="albums-tab"><a href="/albums">Albums</a></li>
         <li id="ajout"><a href="#">Ajouter un titre</a></li>
-	<li id="collection"><a href="#">Ma collection</a></li>
-
+	{% if current_user.is_authenticated %}
+	<li id="collection-tab"><a href="{{ url_for('collection', loginUser=current_user.login, page=1) }}">Ma collection</a></li>
+	{% endif %}
+	
       </ul>
       
       <!-- The search bar -->
