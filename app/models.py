@@ -78,6 +78,10 @@ class LoginForm(Form):
             passwd = m.hexdigest()
             return user if passwd == user.password else None
 
+class InscriptionForm(Form):
+    login = StringField('Choisissez un login')
+    password = PasswordField('Choisissez un mot de passe', validators=[DataRequired()])
+
 
 ###################################
 # ACCESSEURS A LA BASE DE DONNEES #
@@ -125,6 +129,7 @@ def are_ids_ok(login, password):
         return True # si succès, on arrive ici
     except:
         return False # si échec on arrive ici
+
     
 
 @login_manager.user_loader
