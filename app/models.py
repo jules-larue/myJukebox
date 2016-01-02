@@ -1,6 +1,6 @@
 from app import db
 from flask.ext.wtf import Form
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, HiddenField
 from wtforms.validators import DataRequired
 import sqlalchemy
 from hashlib import sha256
@@ -67,6 +67,7 @@ class SearchForm(Form):
 class LoginForm(Form):
     login = StringField('Login')
     password = PasswordField('Mot de passe')
+    next = HiddenField()
 
     def get_authentificated_user(self):
         user = Utilisateur.query.get(self.login.data)
