@@ -1,0 +1,78 @@
+body{
+    background: linear-gradient(45deg, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
+}
+
+label{
+    text-align:center;
+    font-size:1.2em;
+}
+
+.main h1{
+    text-align:center;
+    font-size:4em;
+    margin-bottom:50px;
+}
+
+.main form{
+    text-align:center;
+    vertical-align:middle;
+    padding: 25px;
+    height: 280px !important;
+    width: 70%;
+    border: 2px solid red;
+    margin: 0 auto 30px auto;
+    border-radius: 15px;
+    background: linear-gradient(45deg, rgba(255,168,76,1) 0%,rgba(255,123,13,1) 100%);
+    opacity: 0.9;
+}
+
+.main .input{
+    margin:auto;
+    text-align:center;
+}
+
+.main input{
+    width: 75% !important;
+    margin:0 auto 25px auto;
+}
+    
+.main{
+    margin-top: 130px !important;
+}
+
+.connexion{
+    text-align:center;
+    margin:auto;
+}
+
+.main button{
+    background: #376ce8;
+}
+
+.bg-danger{
+    text-align:center;
+    border: 2px red solid;
+    vertical-align:middle;
+    font-size:1.25em;
+    width: 30%;
+    margin:0 auto 20px auto;
+    background-color: #ff3f3f;
+}
+
+@media (max-width:768px){
+    body{
+	background-size: auto;
+	height: 100%;
+    }
+    .main input{
+	width:100% !important;
+    }
+
+    .main form{
+	width: 100%;
+    }
+
+    .bg-danger{
+	width: 50%;
+    }
+}

@@ -1,5 +1,6 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur
+from .commands import newuser
 from flask import render_template, g, redirect, url_for
 from flask.ext.login import login_user, logout_user
 
@@ -84,6 +85,24 @@ def login():
         "login_page.html",
         form = loginForm,
         ids_ok = ids_ok)
+
+@app.route("/nouvel-utilisateur", methods=("POST", "GET"))
+def nouvel_utilisateur():
+    form = InscriptionForm()
+    if form.validate_on_submit():
+        if form.login.data != None and form.password.data != None:
+            new_user = Utilisateur(login=form.login.data, password=form.password.data)
+            if login_exists(new_user.login): # si l'utilisateur existe, on affiche un message d'erreur
+                return render_template("inscription_page.html",
+                                       form = form,
+                                       user_exists = True)
+            else: # sinon on ajoute l'utilisateur et on retourne sur la page home
+                newuser(new_user.login, new_user.password)
+                return redirect(url_for("home"))
+    return render_template(
+        "inscription_page.html",
+        form = form,
+        user_exists = False)
 
 
 @app.route("/logout")
