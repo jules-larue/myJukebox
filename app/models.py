@@ -130,6 +130,12 @@ def are_ids_ok(login, password):
     except:
         return False # si échec on arrive ici
 
+def login_exists(login):
+    try:
+        Utilisateur.query.filter(Utilisateur.login==login).one()
+        return True
+    except:
+        return False
     
 
 @login_manager.user_loader
