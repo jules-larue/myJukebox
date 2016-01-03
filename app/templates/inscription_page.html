@@ -9,6 +9,7 @@
 {% block main %}
 
 <h1>Rejoignez-nous !</h1>
+<h2>Inscrivez-vous pour profiter de toutes les fonctionnalités de notre application.</h2>
 
 <!-- Affichage d'un message d'erreur -->
 {% if user_exists %}
@@ -18,14 +19,12 @@
 <form role="form" method="POST" action=" {{ url_for('nouvel_utilisateur') }} ">
   {{ form.hidden_tag() }}
   <div class="form-group">
-    <label for="username" class="col-sm-12 control-label">{{ form.login.label }}</label>
     <div class="col-sm-12 input">
       {{ form.login(size=50, class_="form-control", placeholder="Choisissez un login") }}
     </div>
   </div>
 
   <div class="form-group">
-    <label for="password" class="col-sm-12 control-label">{{ form.password.label }}</label>
     <div class="col-sm-12 input">
       {{ form.password(size=50, class_="form-control", placeholder="Choisissez un mot de passe") }}
     </div>
