@@ -8,6 +8,8 @@
 
 {% block main %}
 
+<h1>Authentification</h1>
+
 <!-- Affichage d'un message d'erreur -->
 {% if not ids_ok %}
 <p class="bg-danger">Identifiants incorrects.</p>
@@ -16,14 +18,12 @@
 <form role="form" method="POST" action=" {{ url_for('login') }} ">
   {{ form.hidden_tag() }}
   <div class="form-group">
-    <label for="username" class="col-sm-12 control-label">{{ form.login.label }}</label>
     <div class="col-sm-12 input">
       {{ form.login(size=50, class_="form-control", placeholder="Login") }}
     </div>
   </div>
 
   <div class="form-group">
-    <label for="password" class="col-sm-12 control-label">{{ form.password.label }}</label>
     <div class="col-sm-12 input">
       {{ form.password(size=50, class_="form-control", placeholder="Mot de passe") }}
     </div>
