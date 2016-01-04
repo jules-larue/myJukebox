@@ -10,8 +10,12 @@
 {% block main %}
 <div class="infos-row row">
   
-  <div class="col-xl-5 col-sm-6 col-xs-12"> <!-- L'image de l'album -->
-    <img src="{{ url_for('static', filename='non_disponible.jpg') }}" alt="Image de l'album" />
+  <div class="col-xl-5 col-sm-6 col-xs-12">
+    {% if album.imgURL == None %}
+    <img src="/static/images/non_disponible.jpg" />
+    {% else %}
+    <img src="/static/images/{{album.imgURL}}" />
+    {% endif %}
   </div>
 
   <div class="col-xl-7 col-sm-6 col-xs-12 infos"> <!-- Les informations de l'album -->
@@ -49,7 +53,11 @@
   {% for album in otherAlbumsFromArtist %}
   <div class="col-sm-3 col-xs-6">
     <a href="/albums/album/{{album.id}}">
-      <img src="{{ url_for('static', filename='non_disponible.jpg') }}" alt="Image d'album" />
+      {% if album.imgURL == None %}
+      <img src="/static/images/non_disponible.jpg" />
+      {% else %}
+      <img src="/static/images/{{album.imgURL}}" />
+      {% endif %}
       <h2 class="titreAutre">{{album.titre}}</h2>
     </a>
   </div><!-- Fin col -->
