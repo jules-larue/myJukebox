@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
 {% endblock %}
 
+{% block title %}Accueil | myJukebox{% endblock %}
+
 
 {% block main %}
 <!-- Carousel -->
@@ -21,7 +23,7 @@
 	<div class="container">
           <div class="carousel-caption">
             <h1 id="rock-font">Let's rooock !</h1>
-            <p>La plus belle bibliothèques de titres audio pour tous les amateurs de pure musique rock.</p>
+            <p>La plus belle bibliothèque de titres audio pour tous les amateurs de pure musique rock.</p>
 	    {% if not current_user.is_authenticated %}
             <p><a class="btn btn-lg btn-primary" href="{{ url_for('nouvel_utilisateur') }}" role="button">Inscrivez-vous maintenant !</a></p>
 	    {% endif %}
@@ -82,8 +84,8 @@
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
 	<img class="img-circle" src="{{ url_for('static', filename='folder_guitar.png') }}" alt="Generic placeholder image" width="140" height="140">
-	<h2>Enrichissez notre collection. Ou la vôtre</h2>
-	<p>Notre limite est illimitée. Soyez acteur de notre site, ajoutez vous aussi des titres afin de les partager avec les autres. La collaboration à l'état pur.</p>
+	<h2>Enrichissez votre collection.</h2>
+	<p>En vous inscrivant sur notre site, vous pourrez créer votre propre bibliothèque. Agrandissez-là jusqu'à l'infini, notre limite est illimitée.</p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
 	<img class="img-circle" src="{{ url_for('static', filename='icon-responsive.png') }}" alt="Generic placeholder image" width="140" height="140">
