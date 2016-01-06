@@ -73,6 +73,7 @@ def albums_artiste(id=1, page=1):
     return render_template("albums_artiste.html",
                            page=page,
                            resultats=get_albums_by_artist(id, page),
+                           nom_resultat='albums',
                            artiste = get_artist(id))
 
 
