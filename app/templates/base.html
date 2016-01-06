@@ -40,9 +40,9 @@
       
       <div class="nav navbar-right navbar-text">
 	{% if current_user.is_authenticated %} <!-- Il y a un utilisateur connecté -->
-	<a id="loginInfo">{{ current_user.login }}</a>
 	<a href="{{ url_for('logout') }}">
-	  <span class="glyphicon glyphicon-log-out" title="Logout"></span>
+	  Déconnexion
+	  <span class="glyphicon glyphicon-user" title="{{current_user.login}}"></span>
 	</a>
 	
 	{% else %} <!-- Aucun utilisateur n'est connecté -->
