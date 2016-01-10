@@ -160,6 +160,11 @@ def get_collection(loginUser, page):
     ids = [album.id for album in albums] # les ids d'albums de la bibliothèque de l'utilisateur
     albums = Album.query.filter(Album.id.in_(ids)).paginate(page, 24, False) # la liste paginée des albums de la bibliothèque de l'utilisateur
     return albums
+
+def supp_titre_from_collection(idAlbum, loginUser):
+    """ retire un album de la collection d'un utilisateur """
+    print("delete from bibliotheque where login='"+loginUser+"' and album_id="+str(idAlbum))
+    db.engine.execute("delete from bibliotheque where login='"+loginUser+"' and album_id="+str(idAlbum))
     
 
 @login_manager.user_loader
