@@ -18,9 +18,9 @@
   {% for resultat in resultats.items %}
   <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12">
     <a href=" {{ url_for('album', id=resultat.id) }}">{% if resultat.imgURL == None %}
-      <img src="/static/images/non_disponible.jpg" />
+      <img src="{{ url_for('static', filename='non_disponible.gif') }}" />
       {% else %}
-      <img src="/static/images/{{resultat.imgURL}}" />
+      <img src="{{ url_for('static', filename='images/'+resultat.imgURL) }}" />
       {% endif %}
       <h3>{{resultat.titre}}</h3>
     </a>
