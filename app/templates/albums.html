@@ -14,20 +14,6 @@
 
 {% block div_row %}
 {{super()}}
-<div class="row">
-  {% for resultat in resultats.items %}
-  <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
-    <a href=" {{ url_for('album', id=resultat.id) }}">
-      {% if resultat.imgURL == None %}
-      <img src="{{ url_for('static', filename='non_disponible.gif') }}" />
-      {% else %}
-      <img src="{{ url_for('static', filename='images/'+resultat.imgURL) }}" />
-      {% endif %}
-      <h3>{{resultat.titre}}</h3>
-    </a>
-  </div>
-  {% endfor %}
-</div>
 {% endblock %}<!-- Fin div_row -->
 
 {% block pagination_info_bottom %} {{ super() }} {% endblock %}
