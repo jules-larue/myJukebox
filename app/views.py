@@ -1,5 +1,5 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song, ajouter_album_bibliotheque, get_collection
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song, ajouter_album_bibliotheque, get_collection, supp_titre_from_collection
 from .commands import newuser
 from flask import render_template, g, redirect, url_for, request
 from flask.ext.login import login_user, logout_user, current_user, login_required
@@ -134,6 +134,13 @@ def collection(loginUser, page=1):
                            resultats = get_collection(loginUser, page),
                            page = page,
                            nom_resultat='albums')
+
+@app.route("/supp-titre-collection-perso/<int:idAlbum>")
+@login_required
+def supp_titre_collection_perso(idAlbum):
+    loginUser = current_user.login
+    supp_titre_from_collection(idAlbum, loginUser)
+    return redirect(url_for("album", id=idAlbum))
                            
 
 @app.route("/logout")
