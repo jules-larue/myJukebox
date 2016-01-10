@@ -39,7 +39,7 @@
     {% elif current_user.is_authenticated and deja_possede %} <!-- Utilisateur connecté qui possède l'album dans sa bibliothèque -->
     <a class="ajout btn btn-success" disabled="disabled"><span class="glyphicon glyphicon-ok"></span> Vous possédez déjà cet album</a>
 
-    <a class="ajout btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Supprimer de ma collection</a><!-- supprimer le titre de la collection -->
+    <a class="ajout btn btn-danger" href="{{ url_for('supp_titre_collection_perso', idAlbum=album.id) }}"><span class="glyphicon glyphicon-trash"></span> Supprimer de ma collection</a><!-- supprimer le titre de la collection -->
 
     {% else %} <!-- Utilisateur connecté qui ne possède pas l'album -->
     <a class="ajout btn btn-success" href="{{ url_for('ajout_album_bibliotheque', idAlbum=album.id) }}"><span class="glyphicon glyphicon-heart-empty"></span> Ajouter à ma collection</a>
