@@ -166,6 +166,11 @@ def supp_titre_from_collection(idAlbum, loginUser):
     """ retire un album de la collection d'un utilisateur """
     print("delete from bibliotheque where login='"+loginUser+"' and album_id="+str(idAlbum))
     db.engine.execute("delete from bibliotheque where login='"+loginUser+"' and album_id="+str(idAlbum))
+
+def inc_vues(idAlbum):
+    """ incrémente de 1 le nombre de vues d'un album """
+    Album.query.filter_by(id = idAlbum).update({"nbVues": Album.nbVues + 1})
+    db.session.commit()
     
 
 @login_manager.user_loader
