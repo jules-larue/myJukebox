@@ -45,7 +45,11 @@
     <a class="ajout btn btn-success" href="{{ url_for('ajout_album_bibliotheque', idAlbum=album.id) }}"><span class="glyphicon glyphicon-heart-empty"></span> Ajouter à ma collection</a>
 
     {% endif %}
-    {{deja_ajoute}}
+    {% if album.nbVues>1 %}
+    <p class="vues"><strong>{{album.nbVues}}</strong> vues</p>
+    {% else %}
+    <p class="vues"><strong>{{album.nbVues}}</strong> vue</p>
+    {% endif %}
   </div><!-- Fin bloc infos de l'album -->
 </div>
 

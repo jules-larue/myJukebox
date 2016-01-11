@@ -71,7 +71,14 @@
     text-decoration:none;
 }
 
-
+.vues{
+    width:80px;
+    padding:8px;
+    text-align:center;
+    background-color: #f4f4f4;
+    margin-top:10px;
+    box-shadow: 2px 2px 10px #c1c1c1;
+}
 
 
 @media (max-width:768px){
@@ -95,5 +102,9 @@
 
     .autres-albums-artiste-row h2{
 	width:50%;
+    }
+
+    .vues{
+	margin:auto;
     }
 }
