@@ -34,21 +34,23 @@
 
 <!-- Le bloc de pagination -->
 {% block pagination %}
-<ul class="pagination">
-  <li><a class="page-link" href="{{ url_for(nom_resultat, page=1) }}">Début</a></li>
-
-  {% for i in range(page-9, page+10) %}
-
-  {% if i>0 and i<resultats.pages and i!=page %}
+<div class="text-center">
+  <ul class="pagination">
+    <li><a class="page-link" href="{{ url_for(nom_resultat, page=1) }}">Début</a></li>
+    
+    {% for i in range(page-9, page+10) %}
+    
+    {% if i>0 and i<resultats.pages and i!=page %}
     <li><a class="page-link num-link" href="{{ url_for(nom_resultat, page=i) }}">{{i}}</a></li>
-
-  {% elif i==page %}
+    
+    {% elif i==page %}
     <li><a class="page-link active" href="{{ url_for(nom_resultat, page=i) }}">{{i}}</a></li>
-
-  {% endif %}
-  {% endfor %}
-  <li><a class="page-link" href="{{ url_for(nom_resultat, page=resultats.pages) }}">Fin</a></li>
-</ul> <!-- Fin de la pagination ul -->
+    
+    {% endif %}
+    {% endfor %}
+    <li><a class="page-link" href="{{ url_for(nom_resultat, page=resultats.pages) }}">Fin</a></li>
+  </ul> <!-- Fin de la pagination ul -->
+</div>
 {% endblock %}<!-- Fin bloc pagination -->
 
 {% endblock %} <!-- FIn du bloc main -->
