@@ -40,7 +40,7 @@ def loaddb(filename):
     dejaVus = set()
     for album in albums:
         if album["entryId"] not in dejaVus:
-            albumDB = Album(id=album["entryId"], titre=album["title"], imgURL=album["img"], annee=album["releaseYear"], artiste_id=artistes[album["by"]].id)
+            albumDB = Album(id=album["entryId"], titre=album["title"], imgURL=album["img"], annee=album["releaseYear"], nbVues=0, artiste_id=artistes[album["by"]].id)
             genresAlbum = []
             for genre in album["genre"]:
                 genresAlbum.append(Genre(nom=genre))
