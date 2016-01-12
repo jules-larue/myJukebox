@@ -36,7 +36,7 @@ class Album(db.Model):
     annee       = db.Column(db.Integer)
     nbVues      = db.Column(db.Integer)
     nbNotes     = db.Column(db.Integer)
-    noteMoyenne = db.Column(db.Integer)
+    noteMoyenne = db.Column(db.Float)
     artiste_id  = db.Column(db.Integer, db.ForeignKey("artiste.id"))
     artiste     = db.relationship("Artiste", backref=db.backref("artiste", lazy="dynamic"))
     genres      = db.relationship("Genre", secondary=genre_album, backref=db.backref("genres", lazy="dynamic"))
