@@ -194,6 +194,14 @@ def update_rate(idAlbum, newNote, login):
         newMoyenne = ((album.one().noteMoyenne * (nbNotes-1)) + newNote) / nbNotes # la nouvelle moyenne de l'album
         album.update({"noteMoyenne": newMoyenne})
     db.session.commit()
+
+def has_noted(loginUser, idAlbum):
+    """ renvoie si un utilisateur a noté un album """
+    user = Utilisateur.query.filter_by(login=loginUser).one() # l'utilisateur
+    for album in user.albums_notes:
+        if album.id==idAlbum:
+            return True # l'album a été noté par l'utilisateur
+    return False # album non noté par l'utilisateur
     
 
 @login_manager.user_loader
