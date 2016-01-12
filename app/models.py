@@ -52,9 +52,10 @@ bibliotheque = db.Table("bibliotheque",
                         )
 
 class Utilisateur(db.Model, UserMixin):
-    login    = db.Column(db.String(20), primary_key=True)
-    password = db.Column(db.String(25))
-    albums   = db.relationship("Album", secondary=bibliotheque, backref=db.backref("albums", lazy="dynamic"))
+    login        = db.Column(db.String(20), primary_key=True)
+    password     = db.Column(db.String(25))
+    albums       = db.relationship("Album", secondary=bibliotheque, backref=db.backref("albums", lazy="dynamic"))
+    albums_notes = db.relationship("Album", secondary=bibliotheque, backref=db.backref("albums", lazy="dynamic"))
 
     def get_id(self):
         return self.login
@@ -179,10 +180,12 @@ def inc_vues(idAlbum):
     Album.query.filter_by(id = idAlbum).update({"nbVues": Album.nbVues + 1})
     db.session.commit()
 
-def update_rate(idAlbum, newNote):
+def update_rate(idAlbum, newNote, login):
     """ met à jour la moyenne des notes d'un album en y ajoutant une nouvelle note """
     album = Album.query.get(idAlbum) # l'album dont on va modifier la moyenne
+    user  = Utilisateur.query.get(login) # l'utilisateur qui a mis la note
     album.update({"nbNotes": Album.nbNotes +1}) # + 1 note
+    user.albums_notes.append(idAlbum) # on indique qu'il a noté cet album maintenant
     if album.nbNotes==0: # première note
         album.update({"noteMoyenne": newNote})
     else:
