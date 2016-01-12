@@ -60,7 +60,7 @@
     {% if album.nbNotes==0 %}
     Aucune note
     {% else %}
-    Moyenne : <strong>{{album.noteMoyenne}}/5</strong> (<strong>{{album.nbNotes}}</strong> note(s))
+    Moyenne : <strong>{{"%.1f" % album.noteMoyenne}}/5</strong>  ( <strong>{{album.nbNotes}}</strong> note(s) )
     {% endif %}
     </div>
 
@@ -73,7 +73,7 @@
   <h3>Donnez votre avis !</h3>
   <ul class="notes">
     {% for i in range(6) %}
-    <li><a class="btn btn-primary btn-lg">{{i}}</a></li>
+    <li><a class="btn btn-primary btn-lg" href="{{ url_for('maj_note', idAlbum=album.id, note=i, login=current_user.login) }}">{{i}}</a></li>
     {% endfor %}
   </ul>
 </div>
