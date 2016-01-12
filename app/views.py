@@ -1,5 +1,5 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song, ajouter_album_bibliotheque, get_collection, supp_titre_from_collection, inc_vues, update_rate
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song, ajouter_album_bibliotheque, get_collection, supp_titre_from_collection, inc_vues, update_rate, has_noted
 from .commands import newuser
 from flask import render_template, g, redirect, url_for, request
 from flask.ext.login import login_user, logout_user, current_user, login_required
@@ -31,11 +31,14 @@ def albums(page=1):
 def album(id):
     inc_vues(id) # on incrémente de 1 le nombre de vues de l'album
     deja_possede = None
+    deja_note = None # si un user est loggé, indique s'il a noté l'album
     if g.user != None:
         deja_possede = user_has_song(g.user, id)
+        deja_note = has_noted(g.user, id)
     return render_template("album_page.html",
                            album=get_album_by_id(id),
                            deja_possede = deja_possede,
+                           deja_note = deja_note,
                            otherAlbumsFromArtist = get_some_albums_by_artist(id))
 
 
