@@ -51,11 +51,16 @@ bibliotheque = db.Table("bibliotheque",
                         db.Column('login', db.String(20), db.ForeignKey("utilisateur.login"))
                         )
 
+notes = db.Table("notes",
+                        db.Column('album_id', db.Integer, db.ForeignKey("album.id")),
+                        db.Column('login', db.String(20), db.ForeignKey("utilisateur.login"))
+                        )
+
 class Utilisateur(db.Model, UserMixin):
     login        = db.Column(db.String(20), primary_key=True)
     password     = db.Column(db.String(25))
     albums       = db.relationship("Album", secondary=bibliotheque, backref=db.backref("albums", lazy="dynamic"))
-    albums_notes = db.relationship("Album", secondary=bibliotheque, backref=db.backref("albums", lazy="dynamic"))
+    albums_notes = db.relationship("Album", secondary=notes, backref=db.backref("albums_notes", lazy="dynamic"))
 
     def get_id(self):
         return self.login
@@ -64,10 +69,6 @@ class Utilisateur(db.Model, UserMixin):
     def __repr__(self):
         return "<User %s >" % (self.login)
 
-notes = db.Table("notes",
-                        db.Column('album_id', db.Integer, db.ForeignKey("album.id")),
-                        db.Column('login', db.String(20), db.ForeignKey("utilisateur.login"))
-                        )
 
 class SearchForm(Form):
     search = StringField("Recherche", validators=[DataRequired()])
@@ -182,14 +183,15 @@ def inc_vues(idAlbum):
 
 def update_rate(idAlbum, newNote, login):
     """ met à jour la moyenne des notes d'un album en y ajoutant une nouvelle note """
-    album = Album.query.get(idAlbum) # l'album dont on va modifier la moyenne
+    album = Album.query.filter_by(id=idAlbum) # l'album dont on va modifier la moyenne
     user  = Utilisateur.query.get(login) # l'utilisateur qui a mis la note
     album.update({"nbNotes": Album.nbNotes +1}) # + 1 note
-    user.albums_notes.append(idAlbum) # on indique qu'il a noté cet album maintenant
-    if album.nbNotes==0: # première note
+    user.albums_notes.append(album.one()) # on indique qu'il a noté cet album maintenant
+    if album.one().nbNotes==1: # première note
         album.update({"noteMoyenne": newNote})
     else:
-        newMoyenne = (album.noteMoyenne+newNote)/album.nbNotes # la nouvelle moyenne de l'album
+        nbNotes = album.one().nbNotes
+        newMoyenne = ((album.one().noteMoyenne * (nbNotes-1)) + newNote) / nbNotes # la nouvelle moyenne de l'album
         album.update({"noteMoyenne": newMoyenne})
     db.session.commit()
     
