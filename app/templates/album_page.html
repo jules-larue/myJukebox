@@ -45,11 +45,27 @@
     <a class="ajout btn btn-success" href="{{ url_for('ajout_album_bibliotheque', idAlbum=album.id) }}"><span class="glyphicon glyphicon-heart-empty"></span> Ajouter à ma collection</a>
 
     {% endif %}
+
+    <div class="row row-centered">
+
+    <div class="grey-block col-sm-3 col-centered">
     {% if album.nbVues>1 %}
-    <p class="vues"><strong>{{album.nbVues}}</strong> vues</p>
+    <strong>{{album.nbVues}}</strong> vues
     {% else %}
-    <p class="vues"><strong>{{album.nbVues}}</strong> vue</p>
+    <strong>{{album.nbVues}}</strong> vue
     {% endif %}
+    </div>
+
+    <div class="grey-block moyenne col-sm-9 col-centered">
+    {% if album.nbNotes==0 %}
+    Aucune note
+    {% else %}
+    Moyenne : <strong>{{album.noteMoyenne}}/5</strong> (<strong>{{album.nbNotes}}</strong> note(s))
+    {% endif %}
+    </div>
+
+    </div><!-- fin stats -->
+    
   </div><!-- Fin bloc infos de l'album -->
 </div>
 
