@@ -63,6 +63,11 @@ class Utilisateur(db.Model, UserMixin):
     def __repr__(self):
         return "<User %s >" % (self.login)
 
+notes = db.Table("notes",
+                        db.Column('album_id', db.Integer, db.ForeignKey("album.id")),
+                        db.Column('login', db.String(20), db.ForeignKey("utilisateur.login"))
+                        )
+
 class SearchForm(Form):
     search = StringField("Recherche", validators=[DataRequired()])
     
@@ -172,6 +177,17 @@ def supp_titre_from_collection(idAlbum, loginUser):
 def inc_vues(idAlbum):
     """ incrémente de 1 le nombre de vues d'un album """
     Album.query.filter_by(id = idAlbum).update({"nbVues": Album.nbVues + 1})
+    db.session.commit()
+
+def update_rate(idAlbum, newNote):
+    """ met à jour la moyenne des notes d'un album en y ajoutant une nouvelle note """
+    album = Album.query.get(idAlbum) # l'album dont on va modifier la moyenne
+    album.update({"nbNotes": Album.nbNotes +1}) # + 1 note
+    if album.nbNotes==0: # première note
+        album.update({"noteMoyenne": newNote})
+    else:
+        newMoyenne = (album.noteMoyenne+newNote)/album.nbNotes # la nouvelle moyenne de l'album
+        album.update({"noteMoyenne": newMoyenne})
     db.session.commit()
     
 
