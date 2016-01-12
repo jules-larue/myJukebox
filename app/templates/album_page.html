@@ -53,6 +53,16 @@
   </div><!-- Fin bloc infos de l'album -->
 </div>
 
+<div class="notes-block">
+  <h3>Donnez votre avis !</h3>
+  <ul class="notes">
+    {% for i in range(6) %}
+    <li><a class="btn btn-primary btn-lg">{{i}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+
 
 <div class="autres-albums-artiste-row row"> <!-- Les autres albums de l'artiste -->
   <h1>Autres albums de {{album.artiste.nom}}</h1>
