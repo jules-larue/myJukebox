@@ -202,6 +202,30 @@ def has_noted(loginUser, idAlbum):
         if album.id==idAlbum:
             return True # l'album a été noté par l'utilisateur
     return False # album non noté par l'utilisateur
+
+def get_albums_potentiels(loginUser):
+    """ renvoie une liste d'albums susceptibles d'intéresser un utilisateur (artiste ou genre similaire) """
+    idsAlbumsPossedes = set() # les ids des albums que l'utilisateur possède
+    idsGenresPossedes = set() # ids des genres d'albums que l'user possède
+    idsArtistesPossedes = set() # idem pour les artistes
+    for album in Utilisateur.query.filter_by(login=loginUser).one().albums:
+        idsAlbumsPossedes.add(album.id)
+        idsArtistesPossedes.add(album.id)
+        for genre in album.genres:
+            idsGenresPossedes.add(genre.id)
+
+    # Recherche d'albums pouvant intéresser l'user
+    albumsPotentiels = set() # la liste des albums potentiels qu'on renverra
+    for album in Album.query.all():
+        genres = {genre.id for genre in album.genres} # ids des genres de l'album
+        if album.id not in idsAlbumsPossedes and (album.artiste_id in idsArtistesPossedes or (genres or idsGenresPossedes)):
+            albumsPotentiels.add(album)
+    return albumsPotentiels
+
+def get_albums_mieux_notes():
+    """ renvoie les 6 albums les mieux notés """
+    return Album.query.order_by(Album.noteMoyenne).limit(6)
+
     
 
 @login_manager.user_loader
