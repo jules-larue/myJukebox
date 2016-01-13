@@ -216,7 +216,7 @@ def get_albums_potentiels(loginUser):
     for album in Album.query.filter(Album.artiste_id.in_(idsArtistesPossedes)).all():
         if album.id not in idsAlbumsPossedes:
             albumsPotentiels.append(album)
-            if len(albumsPotentiels)==8:
+            if len(albumsPotentiels)==6:
                 break
     return {albumsPotentiels[i] for i in range(len(albumsPotentiels))}
 
