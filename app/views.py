@@ -17,8 +17,8 @@ def before_request():
 @app.route("/home")
 def home():
     albumsPotentiels = set()
-    #if g.user!=None:
-     #   albumsPotentiels = get_albums_potentiels(g.user)
+    if g.user!=None:
+       albumsPotentiels = get_albums_potentiels(g.user)
     return render_template("home.html",
                            albumsPotentiels = albumsPotentiels,
                            nbAlbumsPotentiels = len(albumsPotentiels),

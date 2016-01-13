@@ -3,6 +3,7 @@
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static', filename='resultats_base.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='resultats_cover.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static', filename='resultats_home.css') }}" />
 {% endblock %}
 
@@ -99,7 +100,7 @@
     <h2>Voici des albums qui pourraient vous intéresser...</h2>
     <div class="row row-centered">
       {% for album in albumsPotentiels %}
-      <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="album col-xl-3 col-md-4 col-sm-6 col-xs-12">
 	<a href=" {{ url_for('album', id=album.id) }}">
 	  {% if album.imgURL == None %}
 	  <img src="{{ url_for('static', filename='non_disponible.gif') }}" />

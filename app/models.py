@@ -206,21 +206,19 @@ def has_noted(loginUser, idAlbum):
 def get_albums_potentiels(loginUser):
     """ renvoie une liste d'albums susceptibles d'intéresser un utilisateur (artiste ou genre similaire) """
     idsAlbumsPossedes = set() # les ids des albums que l'utilisateur possède
-    idsGenresPossedes = set() # ids des genres d'albums que l'user possède
     idsArtistesPossedes = set() # idem pour les artistes
     for album in Utilisateur.query.filter_by(login=loginUser).one().albums:
         idsAlbumsPossedes.add(album.id)
-        idsArtistesPossedes.add(album.id)
-        for genre in album.genres:
-            idsGenresPossedes.add(genre.id)
+        idsArtistesPossedes.add(album.artiste_id)
 
     # Recherche d'albums pouvant intéresser l'user
-    albumsPotentiels = set() # la liste des albums potentiels qu'on renverra
-    for album in Album.query.all():
-        genres = {genre.id for genre in album.genres} # ids des genres de l'album
-        if album.id not in idsAlbumsPossedes and (album.artiste_id in idsArtistesPossedes or (genres or idsGenresPossedes)):
-            albumsPotentiels.add(album)
-    return albumsPotentiels
+    albumsPotentiels = [] # la liste des albums potentiels qu'on renverra
+    for album in Album.query.filter(Album.artiste_id.in_(idsArtistesPossedes)).all():
+        if album.id not in idsAlbumsPossedes:
+            albumsPotentiels.append(album)
+            if len(albumsPotentiels)==8:
+                break
+    return {albumsPotentiels[i] for i in range(len(albumsPotentiels))}
 
 def get_albums_mieux_notes():
     """ renvoie les 6 albums les mieux notés """
