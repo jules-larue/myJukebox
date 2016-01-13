@@ -1,5 +1,5 @@
 from .app import app
-from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song, ajouter_album_bibliotheque, get_collection, supp_titre_from_collection, inc_vues, update_rate, has_noted
+from .models import get_albums, get_album_by_id, get_some_albums_by_artist, SearchForm, get_results_of_search, get_all_artists, get_artist, get_albums_by_artist, LoginForm, are_ids_ok, InscriptionForm, login_exists, Utilisateur, user_has_song, ajouter_album_bibliotheque, get_collection, supp_titre_from_collection, inc_vues, update_rate, has_noted, get_albums_potentiels, get_albums_mieux_notes
 from .commands import newuser
 from flask import render_template, g, redirect, url_for, request
 from flask.ext.login import login_user, logout_user, current_user, login_required
@@ -16,7 +16,13 @@ def before_request():
 
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    albumsPotentiels = set()
+    #if g.user!=None:
+     #   albumsPotentiels = get_albums_potentiels(g.user)
+    return render_template("home.html",
+                           albumsPotentiels = albumsPotentiels,
+                           nbAlbumsPotentiels = len(albumsPotentiels),
+                           albumsMieuxNotes = get_albums_mieux_notes())
 
 @app.route("/albums")
 @app.route("/albums/<int:page>")

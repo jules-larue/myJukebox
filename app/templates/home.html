@@ -2,6 +2,8 @@
 {% block styles %}
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='resultats_base.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='resultats_home.css') }}" />
 {% endblock %}
 
 {% block title %}Accueil | myJukebox{% endblock %}
@@ -10,6 +12,8 @@
 {% block main %}
 <!-- Carousel -->
 <div class="sample main">
+
+  {% if not current_user.is_authenticated %} <!-- Aucun user loggé -->
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -24,9 +28,7 @@
           <div class="carousel-caption">
             <h1 id="rock-font">Let's rooock !</h1>
             <p>La plus belle bibliothèque de titres audio pour tous les amateurs de pure musique rock.</p>
-	    {% if not current_user.is_authenticated %}
             <p><a class="btn btn-lg btn-primary" href="{{ url_for('nouvel_utilisateur') }}" role="button">Inscrivez-vous maintenant !</a></p>
-	    {% endif %}
 	    <div class="filler"></div>
           </div>
 	</div>
@@ -37,9 +39,7 @@
           <div class="carousel-caption">
             <h1>Une communauté de fans.</h1>
             <p>Notre collection est alimentée par des amateurs qui, comme vous, ont le rock dans la peau.</p>
-	    {% if not current_user.is_authenticated %}
             <p><a class="btn btn-lg btn-primary" href="{{ url_for('nouvel_utilisateur') }}" role="button">Inscrivez-vous maintenant !</a></p>
-	    {% endif %}
 	    <div class="filler"></div>
           </div>
 	</div>
@@ -50,9 +50,7 @@
           <div class="carousel-caption">
             <h1>Une bibliothèque à vous.</h1>
             <p>Créez votre bibliothèque personnelle et rendez-là unique. Distinguez-vous.</p>
-	    {% if not current_user.is_authenticated %}
             <p><a class="btn btn-lg btn-primary" href="{{ url_for('nouvel_utilisateur') }}" role="button">Inscrivez-vous maintenant !</a></p>
-	    {% endif %}
 	    <div class="filler"></div>
           </div>
 	</div>
@@ -93,6 +91,45 @@
 	<p>Même loin de chez vous, ne partez pas sans votre jukebox. Sur votre ordinateur, votre tablette ou votre smaprthone, profitez d'une expérience intense et ergonomique. Nous avons pensé à tout, juste pour vous.</p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
+
+    {% else %} <!-- User loggé -->
+    <h1 class="text-center hello">Content de vous voir <strong>{{current_user.login}}</strong> !</h1>
+
+    {% if nbAlbumsPotentiels>0 %}
+    <h2>Voici des albums qui pourraient vous intéresser...</h2>
+    <div class="row row-centered">
+      {% for album in albumsPotentiels %}
+      <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12">
+	<a href=" {{ url_for('album', id=album.id) }}">
+	  {% if album.imgURL == None %}
+	  <img src="{{ url_for('static', filename='non_disponible.gif') }}" />
+	  {% else %}
+	  <img src="{{ url_for('static', filename='images/'+album.imgURL) }}" />
+	  {% endif %}
+	  <h3>{{album.titre}}</h3>
+	</a>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}<!-- Fin if len(albumsPotentiels)>0 -->
+
+    <h2>Découvrez nos albums les mieux notés</h2>
+    <div class="row row-centered">
+      {% for album in albumsMieuxNotes %}
+      <div class="album col-xl-3 col-sm-4 col-xs-12">
+	<a href=" {{ url_for('album', id=album.id) }}">
+	  {% if album.imgURL == None %}
+	  <img src="{{ url_for('static', filename='non_disponible.gif') }}" />
+	  {% else %}
+	  <img src="{{ url_for('static', filename='images/'+album.imgURL) }}" />
+	  {% endif %}
+	  <h3>{{album.titre}}</h3>
+	</a>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% endif %}
 
 
     <!-- FOOTER -->

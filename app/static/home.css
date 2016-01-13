@@ -5,6 +5,14 @@
     src: url('fonts/rock.ttf');
 }
 
+.main{
+    margin-top:70px;
+}
+
+.hello{
+    font-size: 6em;
+}
+
 .img-circle{
     display:block;
     margin:auto;
