@@ -117,7 +117,7 @@
     <h2>Découvrez nos albums les mieux notés</h2>
     <div class="row row-centered">
       {% for album in albumsMieuxNotes %}
-      <div class="album col-xl-3 col-sm-4 col-xs-12">
+      <div class="album col-xl-3 col-md-4 col-sm-6 col-xs-12">
 	<a href=" {{ url_for('album', id=album.id) }}">
 	  {% if album.imgURL == None %}
 	  <img src="{{ url_for('static', filename='non_disponible.gif') }}" />
